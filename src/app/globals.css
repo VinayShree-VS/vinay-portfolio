@@ -62,7 +62,7 @@ body {
 
 /* ── Animated gradient text ─────────────────── */
 .gradient-text {
-  background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4, #a855f7);
+  background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4, #a855f7); /* #06b6d47a */
   background-size: 300% 300%;
   -webkit-background-clip: text;
   background-clip: text;

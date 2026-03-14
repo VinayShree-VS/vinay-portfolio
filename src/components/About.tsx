@@ -1,10 +1,23 @@
 'use client';
 
 import React from 'react';
+import { useCountUp } from '@/hooks/use-countup';
 import { aboutData } from '@/lib/data';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { motion } from 'framer-motion';
 
+function CountUp({ value }: { value: number }) {
+  const count = useCountUp(value);
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+    >
+      <span className="text-3xl sm:text-4xl font-bold gradient-text mb-1">{count}+</span>
+    </motion.div>
+  );
+}
 export function About() {
   return (
     <section id="about" className="py-16 sm:py-20 md:py-24 max-w-6xl mx-auto">
@@ -68,9 +81,7 @@ export function About() {
               whileHover={{ y: -6, scale: 1.03 }}
               className="relative rounded-2xl p-5 sm:p-6 text-center bg-white/60 dark:bg-white/[0.03] backdrop-blur-xl border border-gray-200/40 dark:border-white/[0.06] card-shine border-gradient hover:shadow-[0_20px_60px_-15px_rgba(168,85,247,0.15)] transition-shadow duration-500 cursor-default"
             >
-              <div className="text-3xl sm:text-4xl font-bold gradient-text mb-1">
-                {stat.value}
-              </div>
+              <CountUp value={stat.value} />
               <div className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-medium">
                 {stat.label}
               </div>

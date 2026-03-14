@@ -29,10 +29,10 @@ export const aboutData = {
     "When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, or sharing knowledge through tech blogs and community talks.",
   ],
   stats: [
-    { label: 'Years Experience', value: '5+' },
-    { label: 'Projects Completed', value: '50+' },
-    { label: 'Happy Clients', value: '30+' },
-    { label: 'Open Source Contributions', value: '100+' },
+    { label: 'Years Experience', value: 5 },
+    { label: 'Projects Completed', value: 50 },
+    { label: 'Happy Clients', value: 30 },
+    { label: 'Open Source Contributions', value: 100 },
   ],
 };
 
