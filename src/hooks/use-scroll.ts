@@ -7,22 +7,25 @@ export function useScrollspy(ids: string[], offset: number = 100): string | null
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + offset;
-
-      for (let i = ids.length - 1; i >= 0; i--) {
-        const element = document.getElementById(ids[i]);
-        if (element && element.offsetTop <= scrollPosition) {
-          setActiveId(ids[i]);
-          return;
+      let currentId: string | null = null;
+      let minDistance = Number.POSITIVE_INFINITY;
+      ids.forEach((id) => {
+        const element = document.getElementById(id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          const distance = Math.abs(rect.top);
+          if (rect.top <= 80 && distance < minDistance) { // 80px for navbar height
+            minDistance = distance;
+            currentId = id;
+          }
         }
-      }
-      setActiveId(null);
+      });
+      setActiveId(currentId);
     };
-
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [ids, offset]);
+  }, [ids]);
 
   return activeId;
 }

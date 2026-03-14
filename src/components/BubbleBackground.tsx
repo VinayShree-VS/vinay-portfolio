@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTheme } from '@/components/ThemeProvider';
 
 interface Bubble {
@@ -31,7 +31,14 @@ function generateBubbles(count: number): Bubble[] {
 export function BubbleBackground() {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
-  const bubbles = useMemo(() => generateBubbles(30), []);
+  const [bubbles, setBubbles] = useState<Bubble[]>([]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // eslint-disable-next-line react-hooks/rules-of-hooks, react-hooks/exhaustive-deps
+      setBubbles(generateBubbles(30));
+    }
+  }, []);
 
   return (
     <div

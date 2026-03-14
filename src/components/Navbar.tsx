@@ -11,7 +11,7 @@ import { FiSun, FiMoon, FiMenu, FiX } from 'react-icons/fi';
 
 export function Navbar() {
   const allLinks = [{ label: 'Home', href: '#hero' }, ...siteConfig.navLinks];
-  const activeId = useScrollspy(allLinks.map((l) => l.href.replace('#', '')));
+  const activeId = useScrollspy(allLinks.map((l) => l.href.replace('#', '')), 40);
   const { theme, toggleTheme } = useTheme();
   const isDark = theme === 'dark';
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -165,7 +165,17 @@ export function Navbar() {
                 >
                   <a
                     href={link.href}
-                    onClick={() => setMobileOpen(false)}
+                    onClick={e => {
+                      e.preventDefault();
+                      setMobileOpen(false);
+                      setTimeout(() => {
+                        const id = link.href.replace('#', '');
+                        const el = document.getElementById(id);
+                        if (el) {
+                          el.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      }, 200);
+                    }}
                     className={cn(
                       'block px-4 py-3 rounded-xl transition-all text-sm font-medium',
                       activeId === link.href.replace('#', '')
@@ -188,7 +198,16 @@ export function Navbar() {
               >
                 <a
                   href="#contact"
-                  onClick={() => setMobileOpen(false)}
+                  onClick={e => {
+                    e.preventDefault();
+                    setMobileOpen(false);
+                    setTimeout(() => {
+                      const el = document.getElementById('contact');
+                      if (el) {
+                        el.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }, 200);
+                  }}
                   className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 text-white text-sm font-semibold mt-2"
                 >
                   Contact Me
