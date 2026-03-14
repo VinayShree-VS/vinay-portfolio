@@ -1,18 +1,21 @@
 'use client';
 
-import React from 'react';
 import { useCountUp } from '@/hooks/use-countup';
 import { aboutData } from '@/lib/data';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { motion } from 'framer-motion';
 
+import React, { useState } from 'react';
+
 function CountUp({ value }: { value: number }) {
-  const count = useCountUp(value);
+  const [start, setStart] = useState(false);
+  const count = useCountUp(value, 1200, start);
   return (
     <motion.div
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
+      onViewportEnter={() => setStart(true)}
     >
       <span className="text-3xl sm:text-4xl font-bold gradient-text mb-1">{count}+</span>
     </motion.div>

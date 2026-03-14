@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 
-export function useCountUp(target: number, duration = 1200) {
+export function useCountUp(target: number, duration = 1200, start = true) {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    // Removed unused start variable
+    if (!start) return;
     const startTime = Date.now();
     const step = () => {
       const elapsed = Date.now() - startTime;
@@ -20,7 +20,7 @@ export function useCountUp(target: number, duration = 1200) {
     step();
     // Cleanup
     return () => setCount(target);
-  }, [target, duration]);
+  }, [target, duration, start]);
 
   return count;
 }
